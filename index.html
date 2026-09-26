@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JobFinder - Responsive job search portal UI built with HTML, CSS and JavaScript.">
+  <title>JobFinder | Find Your Next Opportunity</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#"><span class="brand-mark">JF</span><span>JobFinder</span></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#jobs">Find Jobs</a>
+        <a href="#companies">Companies</a>
+        <a href="#resources">Resources</a>
+      </nav>
+      <button class="post-btn" type="button" onclick="showToast('Job posting feature is coming soon!')">Post a Job</button>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="hero-copy">
+          <span class="eyebrow">🚀 10,000+ opportunities</span>
+          <h1>Find work that <span>moves you forward.</span></h1>
+          <p>Search thousands of jobs from growing startups and established companies. Your next opportunity is closer than you think.</p>
+          <form class="search-bar" id="searchForm">
+            <div class="search-field">
+              <span>⌕</span>
+              <input id="keywordInput" type="search" placeholder="Job title, keyword, or company" aria-label="Search jobs">
+            </div>
+            <div class="search-field location">
+              <span>⌖</span>
+              <input id="locationInput" type="search" placeholder="City or remote" aria-label="Search location">
+            </div>
+            <button type="submit">Search Jobs</button>
+          </form>
+          <div class="popular"><strong>Popular:</strong> Web Developer · UI/UX Designer · Marketing · Data Analyst</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-top"><span>Featured opportunity</span><b>● Live</b></div>
+          <div class="company-icon accent">N</div>
+          <h3>Senior Product Designer</h3>
+          <p>Nova Labs · Remote</p>
+          <div class="mini-tags"><span>Full-time</span><span>Design</span><span>$90k–$120k</span></div>
+          <div class="match"><span>94% match</span><div><i style="width:94%"></i></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="jobs-section" id="jobs">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="eyebrow">CURATED FOR YOU</span><h2>Latest job opportunities</h2></div>
+          <span class="result-count" id="resultCount"></span>
+        </div>
+
+        <div class="workspace">
+          <aside class="filters" id="filters">
+            <div class="filter-head"><h3>Filter jobs</h3><button id="clearFilters" type="button">Clear all</button></div>
+            <label>Job type</label>
+            <div class="checks">
+              <label><input type="checkbox" value="Full-time" class="type-filter"> Full-time <small>1,248</small></label>
+              <label><input type="checkbox" value="Part-time" class="type-filter"> Part-time <small>384</small></label>
+              <label><input type="checkbox" value="Contract" class="type-filter"> Contract <small>276</small></label>
+              <label><input type="checkbox" value="Internship" class="type-filter"> Internship <small>192</small></label>
+            </div>
+            <label>Experience</label>
+            <select id="experienceFilter"><option value="">Any experience</option><option>Entry Level</option><option>Mid Level</option><option>Senior Level</option></select>
+            <label>Category</label>
+            <select id="categoryFilter"><option value="">All categories</option><option>Engineering</option><option>Design</option><option>Marketing</option><option>Data</option><option>Product</option></select>
+            <label class="switch-row"><span>Remote only</span><input id="remoteFilter" type="checkbox"><span class="switch"></span></label>
+          </aside>
+
+          <div class="job-area">
+            <div class="mobile-filter-row"><button id="filterBtn" type="button">☷ Filters</button><select id="sortSelect"><option value="latest">Most recent</option><option value="salary">Highest salary</option></select></div>
+            <div class="job-grid" id="jobGrid"></div>
+            <div class="empty-state" id="emptyState" hidden><div>⌕</div><h3>No jobs found</h3><p>Try changing your search or filters.</p><button id="resetEmpty">Reset filters</button></div>
+            <button class="load-more" id="loadMore" type="button">Load more jobs</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="companies" id="companies">
+      <div class="container">
+        <div class="section-heading centered"><span class="eyebrow">TRUSTED EMPLOYERS</span><h2>Build your career with great teams</h2></div>
+        <div class="company-strip"><span>◈ NOVA</span><span>◉ vertex</span><span>◆ pixelly</span><span>✦ Orbit</span><span>◌ cloudbase</span></div>
+      </div>
+    </section>
+
+    <section class="resources" id="resources">
+      <div class="container resource-card"><div><span class="eyebrow">CAREER RESOURCES</span><h2>Ready for your next interview?</h2><p>Explore practical resources to improve your resume, portfolio and interview skills.</p></div><button onclick="showToast('Resources are being prepared!')">Explore resources →</button></div>
+    </section>
+  </main>
+
+  <footer><div class="container footer-inner"><div><a class="brand" href="#"><span class="brand-mark">JF</span><span>JobFinder</span></a><p>Find opportunities. Build your future.</p></div><p>© 2026 JobFinder · SpireX Foundation Task 17</p></div></footer>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <div class="job-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+      <div class="modal-company" id="modalIcon"></div>
+      <span class="eyebrow" id="modalCompany"></span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalMeta"></p>
+      <div class="modal-tags" id="modalTags"></div>
+      <hr><h3>About this role</h3><p id="modalDescription"></p>
+      <div class="modal-actions"><button class="apply-btn" id="applyBtn">Apply now</button><button class="save-btn" id="modalSave">♡ Save job</button></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
